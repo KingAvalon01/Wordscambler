@@ -41,7 +41,6 @@ class WordScrambleGame {
         this.gameOverEl = document.getElementById('gameOver');
         this.finalScoreEl = document.getElementById('finalScore');
         this.restartBtnEl = document.getElementById('restartBtn');
-        this.readyBtnEl = document.getElementById('readyBtn');
     }
     
     setupEventListeners() {
@@ -52,53 +51,16 @@ class WordScrambleGame {
             }
         });
         this.restartBtnEl.addEventListener('click', () => this.startNewGame());
-        this.readyBtnEl.addEventListener('click', () => this.startFirstGame());
-        
-        // Focus input when page loads
-        // Don't focus input until game starts
-    }
-    
-    initializeGame() {
-        this.score = 0;
-        this.gameActive = true;
-        this.gameStarted = false;
-        this.updateScore();
-        
-        // Show ready state without starting timer
-        this.scrambledWordEl.textContent = "READY?";
-        this.timeLeft = 30;
-        this.updateTimer();
-        this.timerEl.classList.remove('warning');
-        
-        // Clear any existing timer
-        if (this.timer) {
-            clearInterval(this.timer);
-            this.timer = null;
-        }
-        
-        // Show ready container
-        const readyContainer = document.getElementById('readyContainer');
-        if (readyContainer) {
-            readyContainer.style.display = 'block';
-        }
-        
-        // Clear messages
-        this.messageEl.textContent = '';
-        this.messageEl.className = 'message';
-        this.playerInputEl.value = '';
-    }
-    
-    startFirstGame() {
-        this.gameStarted = true;
-        document.getElementById('readyContainer').style.display = 'none';
-        this.nextWord();
-        this.playerInputEl.focus();
     }
     
     startNewGame() {
         this.gameOverEl.style.display = 'none';
-        this.initializeGame();
-    }
+        this.startNewGame();
+        this.score = 0;
+        this.gameActive = true;
+        this.updateScore();
+        this.nextWord();
+        this.playerInputEl.focus();
     
     nextWord() {
         if (!this.gameActive) return;
@@ -107,9 +69,7 @@ class WordScrambleGame {
         this.messageEl.textContent = '';
         this.messageEl.className = 'message';
         this.playerInputEl.value = '';
-        if (this.gameStarted) {
-            this.playerInputEl.focus();
-        }
+        this.playerInputEl.focus();
         
         // Select random word
         this.currentWord = this.words[Math.floor(Math.random() * this.words.length)];
@@ -120,20 +80,12 @@ class WordScrambleGame {
             this.scrambledWord = this.scrambleWord(this.currentWord);
         }
         
-        if (this.gameStarted) {
-            this.scrambledWordEl.textContent = this.scrambledWord;
-        } else {
-            this.scrambledWordEl.textContent = "READY?";
-        }
+        this.scrambledWordEl.textContent = this.scrambledWord;
         
         // Reset and start timer
         this.timeLeft = 30;
         this.updateTimer();
-        
-        // Start timer only if game has actually started
-        if (this.gameStarted) {
-            this.startTimer();
-        }
+        this.startTimer();
     }
     
     scrambleWord(word) {
@@ -172,7 +124,7 @@ class WordScrambleGame {
     }
     
     checkAnswer() {
-        if (!this.gameActive || !this.gameStarted) return;
+        if (!this.gameActive) return;
         
         const playerAnswer = this.playerInputEl.value.trim().toUpperCase();
         
@@ -214,33 +166,8 @@ class WordScrambleGame {
         this.gameOver();
     }
     
-    resetForNewGame() {
-        // Clear previous messages and input
-        this.messageEl.textContent = '';
-        this.messageEl.className = 'message';
-        this.playerInputEl.value = '';
-        
-        // Show ready state
-        this.scrambledWordEl.textContent = "READY?";
-        
-        // Reset timer display but don't start it
-        this.timeLeft = 30;
-        this.updateTimer();
-        this.timerEl.classList.remove('warning');
-        
-        // Clear any existing timer
-        if (this.timer) {
-            clearInterval(this.timer);
-            this.timer = null;
-        }
-        
-        // Show ready container
-        document.getElementById('readyContainer').style.display = 'block';
-    }
-    
     gameOver() {
         this.gameActive = false;
-        this.gameStarted = false;
         
         if (this.timer) {
             clearInterval(this.timer);
