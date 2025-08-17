@@ -24,6 +24,7 @@ class WordScrambleGame {
         this.timeLeft = 30;
         this.gameActive = false;
         this.gameStarted = false;
+        this.gameReady = false;
         this.timer = null;
         
         this.initializeElements();
@@ -40,24 +41,31 @@ class WordScrambleGame {
         this.gameOverEl = document.getElementById('gameOver');
         this.finalScoreEl = document.getElementById('finalScore');
         this.restartBtnEl = document.getElementById('restartBtn');
+        this.startBtnEl = document.getElementById('startBtn');
+        this.startContainerEl = document.getElementById('startContainer');
+        this.submitBtnEl = document.getElementById('submitBtn');
     }
     
     setupEventListeners() {
         if (this.playerInputEl) {
             this.playerInputEl.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
+                if (e.key === 'Enter' && this.gameStarted) {
                     this.checkAnswer();
-                }
-            });
-            this.playerInputEl.addEventListener('input', (e) => {
-                if (!this.timerStarted && e.target.value.length === 1 && this.gameActive) {
-                    this.startTimer();
-                    this.timerStarted = true;
                 }
             });
         }
         if (this.restartBtnEl) {
             this.restartBtnEl.addEventListener('click', () => this.startNewGame());
+        }
+        if (this.submitBtnEl) {
+            this.submitBtnEl.addEventListener('click', () => {
+                if (this.gameStarted) {
+                    this.checkAnswer();
+                }
+            });
+        }
+        if (this.startBtnEl) {
+            this.startBtnEl.addEventListener('click', () => this.startGameTimer());
         }
     }
     
@@ -71,19 +79,13 @@ class WordScrambleGame {
     }
     
     nextWord() {
-        if (!this.gameActive) return;
+        if (!this.gameActive || !this.gameStarted) return;
         
         // Clear previous messages and input
         this.messageEl.textContent = '';
         this.messageEl.className = 'message';
         this.playerInputEl.value = '';
         this.playerInputEl.focus();
-        
-        // Reset timer state for new word
-        this.timerStarted = false;
-        if (this.timer) {
-            clearInterval(this.timer);
-        }
         
         // Select random word
         this.currentWord = this.words[Math.floor(Math.random() * this.words.length)];
@@ -99,7 +101,6 @@ class WordScrambleGame {
         // Reset and start timer
         this.timeLeft = 30;
         this.updateTimer();
-        this.startTimer();
     }
     
     scrambleWord(word) {
@@ -138,7 +139,7 @@ class WordScrambleGame {
     }
     
     checkAnswer() {
-        if (!this.gameActive) return;
+        if (!this.gameActive || !this.gameStarted) return;
         
         const playerAnswer = this.playerInputEl.value.trim().toUpperCase();
         

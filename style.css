@@ -184,6 +184,45 @@ body {
     transform: translateY(0);
 }
 
+.start-container {
+    margin-bottom: 30px;
+}
+
+.start-btn {
+    padding: 20px 40px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #4ecdc4, #44a08d);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Nunito', sans-serif;
+    box-shadow: 0 8px 20px rgba(78, 205, 196, 0.4);
+    animation: pulse-start 2s ease-in-out infinite;
+}
+
+.start-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(78, 205, 196, 0.6);
+}
+
+.start-btn:active {
+    transform: translateY(0);
+}
+
+@keyframes pulse-start {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 8px 20px rgba(78, 205, 196, 0.4);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 12px 30px rgba(78, 205, 196, 0.6);
+    }
+}
+
 .message {
     font-size: 1.3rem;
     font-weight: 700;
