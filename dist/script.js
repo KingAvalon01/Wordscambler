@@ -61,6 +61,7 @@ class WordScrambleGame {
         this.updateScore();
         this.nextWord();
         this.playerInputEl.focus();
+    }
     
     nextWord() {
         if (!this.gameActive) return;
