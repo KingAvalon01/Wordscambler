@@ -50,6 +50,7 @@ class WordScrambleGame {
         }
     }
     
+    startNewGame() {
         try {
             this.score = 0;
             this.updateScore();
