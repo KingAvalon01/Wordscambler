@@ -99,6 +99,7 @@ class WordScrambleGame {
         // Reset and start timer
         this.timeLeft = 30;
         this.updateTimer();
+        this.startTimer();
     }
     
     scrambleWord(word) {

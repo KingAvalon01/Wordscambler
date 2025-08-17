@@ -94,6 +94,7 @@ class WordScrambleGame {
         this.timeLeft = 30;
         this.updateTimer();
         this.startTimer();
+        this.startTimer();
     }
     
     scrambleWord(word) {
