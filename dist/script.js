@@ -47,9 +47,6 @@ class WordScrambleGame {
         this.playerInputEl = document.getElementById('playerInput');
         this.messageEl = document.getElementById('message');
         this.submitBtnEl = document.getElementById('submitBtn');
-        this.helpOverlayEl = document.getElementById('helpOverlay');
-        this.helpBtnEl = document.getElementById('helpBtn');
-        this.closeHelpBtnEl = document.getElementById('closeHelpBtn');
     }
     
     setupEventListeners() {
@@ -78,16 +75,6 @@ class WordScrambleGame {
         if (this.submitBtnEl) {
             this.submitBtnEl.addEventListener('click', () => {
                 this.checkAnswer();
-            });
-        }
-        if (this.helpBtnEl) {
-            this.helpBtnEl.addEventListener('click', () => {
-                this.showHelp();
-            });
-        }
-        if (this.closeHelpBtnEl) {
-            this.closeHelpBtnEl.addEventListener('click', () => {
-                this.hideHelp();
             });
         }
     }
@@ -162,18 +149,6 @@ class WordScrambleGame {
         this.gameActive = false;
         this.clearTimer();
         if (this.gameOverModalEl) this.gameOverModalEl.style.display = 'flex';
-    }
-    
-    showHelp() {
-        if (this.helpOverlayEl) {
-            this.helpOverlayEl.classList.remove('help-hidden');
-        }
-    }
-    
-    hideHelp() {
-        if (this.helpOverlayEl) {
-            this.helpOverlayEl.classList.add('help-hidden');
-        }
     }
     
     nextWord() {
