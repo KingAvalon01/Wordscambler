@@ -65,28 +65,29 @@ class WordScrambleGame {
             });
         }
         if (this.startBtnEl) {
-            this.startBtnEl.addEventListener('click', () => this.startGameTimer());
+            this.startBtnEl.addEventListener('click', () => this.startGameFromButton());
         }
     }
     
     startNewGame() {
         this.gameOverEl.style.display = 'none';
+        this.startContainerEl.style.display = 'block';
         this.score = 0;
         this.gameActive = true;
         this.updateScore();
-        this.nextWord();
-        this.playerInputEl.focus();
-    }
-    
-    nextWord() {
-        if (!this.gameActive || !this.gameStarted) return;
-        
-        // Clear previous messages and input
+        this.prepareNewWord();
+        this.playerInputEl.disabled = true;
+        this.playerInputEl.value = '';
         this.messageEl.textContent = '';
         this.messageEl.className = 'message';
-        this.playerInputEl.value = '';
-        this.playerInputEl.focus();
-        
+        this.timeLeft = 30;
+        this.updateTimer();
+        if (this.timer) {
+            clearInterval(this.timer);
+        }
+    }
+    
+    prepareNewWord() {
         // Select random word
         this.currentWord = this.words[Math.floor(Math.random() * this.words.length)];
         this.scrambledWord = this.scrambleWord(this.currentWord);
@@ -97,9 +98,32 @@ class WordScrambleGame {
         }
         
         this.scrambledWordEl.textContent = this.scrambledWord;
+    }
+    
+    startGameFromButton() {
+        this.gameStarted = true;
+        this.gameActive = true;
+        this.timerStarted = true;
+        this.startContainerEl.style.display = 'none';
+        this.playerInputEl.disabled = false;
+        this.playerInputEl.focus();
+        this.startTimer();
+    }
+    
+    nextWord() {
+        if (!this.gameActive) return;
+        
+        // Clear previous messages and input
+        this.messageEl.textContent = '';
+        this.messageEl.className = 'message';
+        this.playerInputEl.value = '';
+        this.playerInputEl.focus();
+        
+        this.prepareNewWord();
         
         // Reset and start timer
         this.timeLeft = 30;
+        this.timerStarted = true;
         this.updateTimer();
     }
     
@@ -178,6 +202,8 @@ class WordScrambleGame {
     
     gameOver() {
         this.gameActive = false;
+        this.gameStarted = false;
+        this.timerStarted = false;
         
         if (this.timer) {
             clearInterval(this.timer);
