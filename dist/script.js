@@ -71,68 +71,21 @@ class WordScrambleGame {
     
     startNewGame() {
         this.gameOverEl.style.display = 'none';
-        this.startContainerEl.style.display = 'block';
         this.score = 0;
-        this.gameActive = false;
-        this.gameStarted = false;
-        this.gameReady = true;
-        this.updateScore();
-        this.prepareWord();
-        this.playerInputEl.disabled = true;
-        this.timeLeft = 30;
-        this.updateTimer();
-        if (this.timer) {
-            clearInterval(this.timer);
-        }
-    }
-    
-    startGameTimer() {
-        if (!this.gameReady) return;
-        
-        this.gameStarted = true;
         this.gameActive = true;
-        this.startContainerEl.style.display = 'none';
-        this.playerInputEl.disabled = false;
+        this.updateScore();
+        this.nextWord();
         this.playerInputEl.focus();
-        this.startTimer();
-    }
-    
-    prepareWord() {
-        // Clear previous messages and input
-        this.messageEl.textContent = '';
-        this.messageEl.className = 'message';
-        this.playerInputEl.value = '';
-        
-        // Select random word
-        this.currentWord = this.words[Math.floor(Math.random() * this.words.length)];
-        this.scrambledWord = this.scrambleWord(this.currentWord);
-        
-        // Make sure scrambled word is different from original
-        while (this.scrambledWord === this.currentWord) {
-            this.scrambledWord = this.scrambleWord(this.currentWord);
-        }
-        
-        this.scrambledWordEl.textContent = this.scrambledWord;
-    }
-    
-    incorrectAnswer() {
-        this.showMessage(`❌ Incorrect! Try again!`, 'incorrect');
     }
     
     nextWord() {
-        if (!this.gameActive) return;
+        if (!this.gameActive || !this.gameStarted) return;
         
         // Clear previous messages and input
         this.messageEl.textContent = '';
         this.messageEl.className = 'message';
         this.playerInputEl.value = '';
         this.playerInputEl.focus();
-        
-        // Reset timer state for new word
-        this.timerStarted = false;
-        if (this.timer) {
-            clearInterval(this.timer);
-        }
         
         // Select random word
         this.currentWord = this.words[Math.floor(Math.random() * this.words.length)];
@@ -148,7 +101,6 @@ class WordScrambleGame {
         // Reset and start timer
         this.timeLeft = 30;
         this.updateTimer();
-        this.startTimer();
     }
     
     scrambleWord(word) {
@@ -187,7 +139,7 @@ class WordScrambleGame {
     }
     
     checkAnswer() {
-        if (!this.gameActive) return;
+        if (!this.gameActive || !this.gameStarted) return;
         
         const playerAnswer = this.playerInputEl.value.trim().toUpperCase();
         
