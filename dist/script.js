@@ -34,8 +34,8 @@ class WordScrambleGame {
         this.scoreEl = document.getElementById('score');
         this.submitBtnEl = document.getElementById('submitBtn');
         this.helpGuideEl = document.getElementById('helpGuide');
-        this.startGameBtnEl = document.getElementById('startGameBtn');
-        this.gameContentEl = document.querySelector('.game-content');
+        this.helpBtnEl = document.getElementById('helpBtn');
+        this.closeHelpBtnEl = document.getElementById('closeHelpBtn');
     }
     
     setupEventListeners() {
