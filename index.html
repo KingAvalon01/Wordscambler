@@ -10,7 +10,7 @@
 <body>
     <div class="game-container">
         <div class="header">
-            <button id="helpBtn" class="help-btn">❓ Help</button>
+            <button id="helpBtn" class="help-btn">?</button>
             <div class="timer-container" id="timerContainer" style="display: none;">
                 <div class="timer-label">Time</div>
                 <div class="timer" id="timer">30</div>
@@ -77,42 +77,38 @@
         <div id="helpModal" class="help-modal" style="display: none;">
             <div class="help-content">
                 <div class="help-header">
-                    <h2>🎯 How to Play WordWiz</h2>
+                    <h2>How to Play</h2>
                     <button id="closeHelpBtn" class="close-help-btn">✕</button>
                 </div>
                 <div class="help-body">
-                    <div class="help-section">
-                        <h3>🎮 Game Rules</h3>
-                        <ul>
-                            <li>Look at the scrambled letters displayed</li>
-                            <li>Unscramble them to form the correct word</li>
-                            <li>Type your answer in the input field</li>
-                            <li>Press Enter or click Submit to check your answer</li>
-                        </ul>
+                    <p class="help-intro">Guess the word by unscrambling the letters!</p>
+                    
+                    <div class="help-example">
+                        <div class="example-scrambled">PELPA</div>
+                        <div class="example-arrow">↓</div>
+                        <div class="example-answer">APPLE</div>
                     </div>
-                    <div class="help-section">
-                        <h3>⚙️ Game Settings</h3>
-                        <ul>
-                            <li><strong>Easy:</strong> 3-4 letter words</li>
-                            <li><strong>Medium:</strong> 4-6 letter words</li>
-                            <li><strong>Hard:</strong> 6-8 letter words</li>
-                        </ul>
+                    
+                    <div class="help-rules">
+                        <div class="rule-item">
+                            <div class="rule-number">1</div>
+                            <div class="rule-text">Look at the scrambled letters</div>
+                        </div>
+                        <div class="rule-item">
+                            <div class="rule-number">2</div>
+                            <div class="rule-text">Type the correct word</div>
+                        </div>
+                        <div class="rule-item">
+                            <div class="rule-number">3</div>
+                            <div class="rule-text">Press Enter or click Submit</div>
+                        </div>
                     </div>
-                    <div class="help-section">
-                        <h3>⏰ Timer Options</h3>
-                        <ul>
-                            <li><strong>No Timer:</strong> Play at your own pace</li>
-                            <li><strong>30/60 seconds:</strong> Challenge yourself with time limits</li>
-                        </ul>
-                    </div>
-                    <div class="help-section">
-                        <h3>💡 Tips</h3>
-                        <ul>
-                            <li>Try rearranging letters in different patterns</li>
-                            <li>Look for common word endings like -ING, -ED, -ER</li>
-                            <li>Start with vowels and build around them</li>
-                            <li>Don't worry about mistakes - keep trying!</li>
-                        </ul>
+                    
+                    <div class="help-tips">
+                        <h3>Tips</h3>
+                        <div class="tip-item">💡 Look for common word patterns</div>
+                        <div class="tip-item">💡 Start with vowels (A, E, I, O, U)</div>
+                        <div class="tip-item">💡 Try different letter combinations</div>
                     </div>
                 </div>
             </div>
