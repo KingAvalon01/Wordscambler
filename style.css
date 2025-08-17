@@ -429,24 +429,29 @@ body {
     box-shadow: 0 12px 30px rgba(78, 205, 196, 0.4);
 }
 
-.new-game-btn {
+.game-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.action-btn {
     padding: 12px 25px;
     font-size: 1rem;
     font-weight: 600;
-    background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
-    color: #333;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
     border: none;
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s ease;
     font-family: 'Nunito', sans-serif;
-    box-shadow: 0 5px 15px rgba(253, 203, 110, 0.3);
-    margin-top: 20px;
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
 }
 
-.new-game-btn:hover {
+.action-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(253, 203, 110, 0.4);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
 }
 
 .game-over-modal {
@@ -544,16 +549,14 @@ body {
 }
 
 .input-container {
-    display: flex;
-    gap: 15px;
     margin-bottom: 30px;
+    display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 #playerInput {
-    flex: 1;
     max-width: 300px;
+    width: 100%;
     padding: 15px 20px;
     font-size: 1.2rem;
     border: 3px solid #e0e0e0;
@@ -589,6 +592,7 @@ body {
     transition: all 0.3s ease;
     font-family: 'Nunito', sans-serif;
     box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    margin-bottom: 20px;
 }
 
 .submit-btn:hover {
@@ -694,11 +698,6 @@ body {
         gap: 15px;
     }
     
-    .input-container {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
     #playerInput {
         max-width: 100%;
     }
@@ -709,6 +708,10 @@ body {
     }
     
     .radio-option {
+        justify-content: center;
+    }
+    
+    .game-actions {
         justify-content: center;
     }
 }
