@@ -58,10 +58,19 @@ class WordScrambleGame {
         // Don't focus input until game starts
     }
     
+    startFirstGame() {
+        this.gameStarted = true;
+        document.getElementById('readyContainer').style.display = 'none';
+        this.playerInputEl.focus();
+        this.startTimer();
+    }
+    
     startNewGame() {
         this.score = 0;
         this.gameActive = true;
+        this.gameStarted = false;
         this.gameOverEl.style.display = 'none';
+        document.getElementById('readyContainer').style.display = 'block';
         this.updateScore();
         this.nextWord();
     }
@@ -73,7 +82,9 @@ class WordScrambleGame {
         this.messageEl.textContent = '';
         this.messageEl.className = 'message';
         this.playerInputEl.value = '';
-        this.playerInputEl.focus();
+        if (this.gameStarted) {
+            this.playerInputEl.focus();
+        }
         
         // Select random word
         this.currentWord = this.words[Math.floor(Math.random() * this.words.length)];
@@ -84,16 +95,18 @@ class WordScrambleGame {
             this.scrambledWord = this.scrambleWord(this.currentWord);
         }
         
-        this.scrambledWordEl.textContent = this.scrambledWord;
+        if (this.gameStarted) {
+            this.scrambledWordEl.textContent = this.scrambledWord;
+        } else {
+            this.scrambledWordEl.textContent = "READY?";
+        }
         
         // Reset and start timer
         this.timeLeft = 30;
         this.updateTimer();
         
         // Only start timer if game has actually started
-        if (this.gameStarted) {
-            this.startTimer();
-        }
+        // Timer will be started by startFirstGame() method
     }
     
     scrambleWord(word) {
@@ -202,6 +215,4 @@ class WordScrambleGame {
 // Start the game when page loads
 document.addEventListener('DOMContentLoaded', () => {
     const game = new WordScrambleGame();
-    // Show initial scrambled word but don't start timer
-    game.scrambledWordEl.textContent = "READY?";
 });
