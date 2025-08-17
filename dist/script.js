@@ -51,32 +51,34 @@ class WordScrambleGame {
                 this.checkAnswer();
             });
         }
-        if (this.startGameBtnEl) {
-            this.startGameBtnEl.addEventListener('click', () => {
-                this.startGame();
+        if (this.helpBtnEl) {
+            this.helpBtnEl.addEventListener('click', () => {
+                this.showHelp();
+            });
+        }
+        if (this.closeHelpBtnEl) {
+            this.closeHelpBtnEl.addEventListener('click', () => {
+                this.hideHelp();
             });
         }
     }
     
-    startGame() {
+    showHelp() {
         if (this.helpGuideEl) {
-            this.helpGuideEl.style.display = 'none';
+            this.helpGuideEl.classList.remove('help-hidden');
         }
-        if (this.gameContentEl) {
-            this.gameContentEl.classList.remove('game-hidden');
+    }
+    
+    hideHelp() {
+        if (this.helpGuideEl) {
+            this.helpGuideEl.classList.add('help-hidden');
         }
-        this.score = 0;
-        this.updateScore();
-        this.nextWord();
     }
     
     startNewGame() {
-        if (this.gameContentEl) {
-            this.gameContentEl.classList.add('game-hidden');
-        }
-        if (this.helpGuideEl) {
-            this.helpGuideEl.style.display = 'block';
-        }
+        this.score = 0;
+        this.updateScore();
+        this.nextWord();
     }
     
     nextWord() {
