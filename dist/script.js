@@ -21,7 +21,6 @@ class WordScrambleGame {
         this.currentWord = '';
         this.scrambledWord = '';
         this.score = 0;
-        this.gameActive = true;
         
         this.initializeElements();
         this.setupEventListeners();
@@ -33,42 +32,29 @@ class WordScrambleGame {
         this.playerInputEl = document.getElementById('playerInput');
         this.messageEl = document.getElementById('message');
         this.scoreEl = document.getElementById('score');
-        this.gameOverEl = document.getElementById('gameOver');
-        this.finalScoreEl = document.getElementById('finalScore');
-        this.restartBtnEl = document.getElementById('restartBtn');
         this.submitBtnEl = document.getElementById('submitBtn');
     }
     
     setupEventListeners() {
         if (this.playerInputEl) {
             this.playerInputEl.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter' && this.gameActive) {
+                if (e.key === 'Enter') {
                     this.checkAnswer();
                 }
             });
         }
-        if (this.restartBtnEl) {
-            this.restartBtnEl.addEventListener('click', () => this.startNewGame());
-        }
         if (this.submitBtnEl) {
             this.submitBtnEl.addEventListener('click', () => {
-                if (this.gameActive) {
-                    this.checkAnswer();
-                }
+                this.checkAnswer();
             });
         }
     }
     
     startNewGame() {
-        if (this.gameOverEl) {
-            this.gameOverEl.style.display = 'none';
-        }
         this.score = 0;
-        this.gameActive = true;
         this.updateScore();
         this.nextWord();
         if (this.playerInputEl) {
-            this.playerInputEl.disabled = false;
             this.playerInputEl.value = '';
             this.playerInputEl.focus();
         }
@@ -79,9 +65,6 @@ class WordScrambleGame {
     }
     
     nextWord() {
-        if (!this.gameActive) return;
-        
-        // Clear previous messages and input
         if (this.messageEl) {
             this.messageEl.textContent = '';
             this.messageEl.className = 'message';
@@ -91,11 +74,9 @@ class WordScrambleGame {
             this.playerInputEl.focus();
         }
         
-        // Select random word
         this.currentWord = this.words[Math.floor(Math.random() * this.words.length)];
         this.scrambledWord = this.scrambleWord(this.currentWord);
         
-        // Make sure scrambled word is different from original
         while (this.scrambledWord === this.currentWord) {
             this.scrambledWord = this.scrambleWord(this.currentWord);
         }
@@ -115,7 +96,7 @@ class WordScrambleGame {
     }
     
     checkAnswer() {
-        if (!this.gameActive || !this.playerInputEl) return;
+        if (!this.playerInputEl) return;
         
         const playerAnswer = this.playerInputEl.value.trim().toUpperCase();
         
@@ -138,7 +119,6 @@ class WordScrambleGame {
         this.updateScore();
         this.showMessage('🎉 Correct! Well done! 🎉', 'correct');
         
-        // Start next word after a short delay
         setTimeout(() => {
             this.nextWord();
         }, 1500);
@@ -158,7 +138,6 @@ class WordScrambleGame {
     }
 }
 
-// Start the game when page loads
 document.addEventListener('DOMContentLoaded', () => {
-    const game = new WordScrambleGame();
+    new WordScrambleGame();
 });
