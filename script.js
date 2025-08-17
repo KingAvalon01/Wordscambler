@@ -33,7 +33,7 @@ class WordScrambleGame {
         this.playerInputEl = document.getElementById('playerInput');
         this.messageEl = document.getElementById('message');
         this.scoreEl = document.getElementById('score');
-        this.gameOverEl = document.getElementById('gameOver') || null;
+        this.gameOverEl = document.getElementById('gameOver');
         this.finalScoreEl = document.getElementById('finalScore');
         this.restartBtnEl = document.getElementById('restartBtn');
         this.submitBtnEl = document.getElementById('submitBtn');
@@ -60,7 +60,7 @@ class WordScrambleGame {
     }
     
     startNewGame() {
-        if (this.gameOverEl && this.gameOverEl.style) {
+        if (this.gameOverEl) {
             this.gameOverEl.style.display = 'none';
         }
         this.score = 0;
@@ -72,18 +72,24 @@ class WordScrambleGame {
             this.playerInputEl.value = '';
             this.playerInputEl.focus();
         }
-        this.messageEl.textContent = '';
-        this.messageEl.className = 'message';
+        if (this.messageEl) {
+            this.messageEl.textContent = '';
+            this.messageEl.className = 'message';
+        }
     }
     
     nextWord() {
         if (!this.gameActive) return;
         
         // Clear previous messages and input
-        this.messageEl.textContent = '';
-        this.messageEl.className = 'message';
-        this.playerInputEl.value = '';
-        this.playerInputEl.focus();
+        if (this.messageEl) {
+            this.messageEl.textContent = '';
+            this.messageEl.className = 'message';
+        }
+        if (this.playerInputEl) {
+            this.playerInputEl.value = '';
+            this.playerInputEl.focus();
+        }
         
         // Select random word
         this.currentWord = this.words[Math.floor(Math.random() * this.words.length)];
@@ -94,7 +100,9 @@ class WordScrambleGame {
             this.scrambledWord = this.scrambleWord(this.currentWord);
         }
         
-        this.scrambledWordEl.textContent = this.scrambledWord;
+        if (this.scrambledWordEl) {
+            this.scrambledWordEl.textContent = this.scrambledWord;
+        }
     }
     
     scrambleWord(word) {
@@ -107,7 +115,7 @@ class WordScrambleGame {
     }
     
     checkAnswer() {
-        if (!this.gameActive) return;
+        if (!this.gameActive || !this.playerInputEl) return;
         
         const playerAnswer = this.playerInputEl.value.trim().toUpperCase();
         
@@ -137,12 +145,16 @@ class WordScrambleGame {
     }
     
     showMessage(text, type) {
-        this.messageEl.textContent = text;
-        this.messageEl.className = `message ${type}`;
+        if (this.messageEl) {
+            this.messageEl.textContent = text;
+            this.messageEl.className = `message ${type}`;
+        }
     }
     
     updateScore() {
-        this.scoreEl.textContent = this.score;
+        if (this.scoreEl) {
+            this.scoreEl.textContent = this.score;
+        }
     }
 }
 
