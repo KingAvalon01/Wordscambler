@@ -38,12 +38,153 @@ body {
 
 .header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     margin-bottom: 30px;
     gap: 20px;
     align-items: center;
 }
 
+.help-btn {
+    padding: 12px 18px;
+    font-size: 1rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #74b9ff, #0984e3);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Nunito', sans-serif;
+    box-shadow: 0 4px 12px rgba(116, 185, 255, 0.3);
+}
+
+.help-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(116, 185, 255, 0.4);
+}
+
+.help-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1002;
+    padding: 20px;
+}
+
+.help-content {
+    background: white;
+    border-radius: 20px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.help-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 30px 20px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.help-header h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.8rem;
+    color: #333;
+    margin: 0;
+}
+
+.close-help-btn {
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-help-btn:hover {
+    background: #ee5a52;
+    transform: scale(1.1);
+}
+
+.help-body {
+    padding: 20px 30px 30px;
+}
+
+.help-section {
+    margin-bottom: 25px;
+}
+
+.help-section:last-child {
+    margin-bottom: 0;
+}
+
+.help-section h3 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.help-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.help-section li {
+    padding: 8px 0;
+    padding-left: 20px;
+    position: relative;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #555;
+}
+
+.help-section li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #667eea;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.help-section li strong {
+    color: #333;
+    font-weight: 700;
+}
 .timer-container {
     background: linear-gradient(135deg, #ff6b6b, #ee5a52);
     color: white;

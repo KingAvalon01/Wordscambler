@@ -43,6 +43,9 @@ class WordScrambleGame {
         this.timerEl = document.getElementById('timer');
         this.gameOverModalEl = document.getElementById('gameOverModal');
         this.playAgainBtnEl = document.getElementById('playAgainBtn');
+        this.helpBtnEl = document.getElementById('helpBtn');
+        this.helpModalEl = document.getElementById('helpModal');
+        this.closeHelpBtnEl = document.getElementById('closeHelpBtn');
         this.scrambledWordEl = document.getElementById('scrambledWord');
         this.playerInputEl = document.getElementById('playerInput');
         this.messageEl = document.getElementById('message');
@@ -65,10 +68,30 @@ class WordScrambleGame {
                 this.showSettings();
             });
         }
+        if (this.helpBtnEl) {
+            this.helpBtnEl.addEventListener('click', () => {
+                this.showHelp();
+            });
+        }
+        if (this.closeHelpBtnEl) {
+            this.closeHelpBtnEl.addEventListener('click', () => {
+                this.hideHelp();
+            });
+        }
+        if (this.helpModalEl) {
+            this.helpModalEl.addEventListener('click', (e) => {
+                if (e.target === this.helpModalEl) {
+                    this.hideHelp();
+                }
+            });
+        }
         if (this.playerInputEl) {
             this.playerInputEl.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
                     this.checkAnswer();
+                }
+                if (e.key === 'Escape') {
+                    this.hideHelp();
                 }
             });
         }
@@ -76,6 +99,25 @@ class WordScrambleGame {
             this.submitBtnEl.addEventListener('click', () => {
                 this.checkAnswer();
             });
+        }
+        
+        // Global escape key listener
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.hideHelp();
+            }
+        });
+    }
+    
+    showHelp() {
+        if (this.helpModalEl) {
+            this.helpModalEl.style.display = 'flex';
+        }
+    }
+    
+    hideHelp() {
+        if (this.helpModalEl) {
+            this.helpModalEl.style.display = 'none';
         }
     }
     

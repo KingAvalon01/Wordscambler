@@ -10,6 +10,7 @@
 <body>
     <div class="game-container">
         <div class="header">
+            <button id="helpBtn" class="help-btn">❓ Help</button>
             <div class="timer-container" id="timerContainer" style="display: none;">
                 <div class="timer-label">Time</div>
                 <div class="timer" id="timer">30</div>
@@ -70,6 +71,50 @@
                 <h2>⏰ Time's Up!</h2>
                 <p>Great job playing WordWiz!</p>
                 <button id="playAgainBtn" class="submit-btn">Play Again</button>
+            </div>
+        </div>
+
+        <div id="helpModal" class="help-modal" style="display: none;">
+            <div class="help-content">
+                <div class="help-header">
+                    <h2>🎯 How to Play WordWiz</h2>
+                    <button id="closeHelpBtn" class="close-help-btn">✕</button>
+                </div>
+                <div class="help-body">
+                    <div class="help-section">
+                        <h3>🎮 Game Rules</h3>
+                        <ul>
+                            <li>Look at the scrambled letters displayed</li>
+                            <li>Unscramble them to form the correct word</li>
+                            <li>Type your answer in the input field</li>
+                            <li>Press Enter or click Submit to check your answer</li>
+                        </ul>
+                    </div>
+                    <div class="help-section">
+                        <h3>⚙️ Game Settings</h3>
+                        <ul>
+                            <li><strong>Easy:</strong> 3-4 letter words</li>
+                            <li><strong>Medium:</strong> 4-6 letter words</li>
+                            <li><strong>Hard:</strong> 6-8 letter words</li>
+                        </ul>
+                    </div>
+                    <div class="help-section">
+                        <h3>⏰ Timer Options</h3>
+                        <ul>
+                            <li><strong>No Timer:</strong> Play at your own pace</li>
+                            <li><strong>30/60 seconds:</strong> Challenge yourself with time limits</li>
+                        </ul>
+                    </div>
+                    <div class="help-section">
+                        <h3>💡 Tips</h3>
+                        <ul>
+                            <li>Try rearranging letters in different patterns</li>
+                            <li>Look for common word endings like -ING, -ED, -ER</li>
+                            <li>Start with vowels and build around them</li>
+                            <li>Don't worry about mistakes - keep trying!</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
 
