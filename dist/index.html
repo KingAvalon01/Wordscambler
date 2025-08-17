@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Scramble Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <div class="timer-container">
+                <div class="timer-label">Time Left</div>
+                <div class="timer" id="timer">30</div>
+            </div>
+            <div class="score-container">
+                <div class="score-label">Score</div>
+                <div class="score" id="score">0</div>
+            </div>
+        </div>
+
+        <div class="game-content">
+            <h1 class="game-title">🎯 Word Scramble 🎯</h1>
+            
+            <div class="scrambled-word-container">
+                <div class="scrambled-word" id="scrambledWord">LOADING...</div>
+                <div class="word-hint" id="wordHint">Unscramble the letters!</div>
+            </div>
+
+            <div class="input-container">
+                <input type="text" id="playerInput" placeholder="Type your answer here..." maxlength="20">
+                <button id="submitBtn" class="submit-btn">Submit</button>
+            </div>
+
+            <div class="message" id="message"></div>
+
+            <div class="game-over" id="gameOver" style="display: none;">
+                <h2>🎮 Game Over! 🎮</h2>
+                <p>Your final score: <span id="finalScore">0</span></p>
+                <button id="restartBtn" class="restart-btn">Play Again</button>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <p>💡 Unscramble the letters to make a real word!</p>
+            <p>⏰ You have 30 seconds per word</p>
+            <p>🏆 Get as many words as you can!</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
