@@ -41,6 +41,7 @@ class WordScrambleGame {
         this.gameOverEl = document.getElementById('gameOver');
         this.finalScoreEl = document.getElementById('finalScore');
         this.restartBtnEl = document.getElementById('restartBtn');
+        this.readyBtnEl = document.getElementById('readyBtn');
     }
     
     setupEventListeners() {
