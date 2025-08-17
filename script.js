@@ -63,7 +63,6 @@ class WordScrambleGame {
         document.getElementById('readyContainer').style.display = 'none';
         this.nextWord();
         this.playerInputEl.focus();
-        this.startTimer();
     }
     
     startNewGame() {
@@ -106,8 +105,10 @@ class WordScrambleGame {
         this.timeLeft = 30;
         this.updateTimer();
         
-        // Only start timer if game has actually started
-        // Timer will be started by startFirstGame() method
+        // Start timer only if game has actually started
+        if (this.gameStarted) {
+            this.startTimer();
+        }
     }
     
     scrambleWord(word) {
