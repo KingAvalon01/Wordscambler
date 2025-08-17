@@ -60,16 +60,20 @@ class WordScrambleGame {
     }
     
     startNewGame() {
-        this.gameOverEl.style.display = 'none';
+        if (this.gameOverEl) {
+            this.gameOverEl.style.display = 'none';
+        }
         this.score = 0;
         this.gameActive = true;
         this.updateScore();
         this.nextWord();
-        this.playerInputEl.disabled = false;
-        this.playerInputEl.value = '';
+        if (this.playerInputEl) {
+            this.playerInputEl.disabled = false;
+            this.playerInputEl.value = '';
+            this.playerInputEl.focus();
+        }
         this.messageEl.textContent = '';
         this.messageEl.className = 'message';
-        this.playerInputEl.focus();
     }
     
     nextWord() {
