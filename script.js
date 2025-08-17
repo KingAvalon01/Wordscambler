@@ -33,6 +33,9 @@ class WordScrambleGame {
         this.messageEl = document.getElementById('message');
         this.scoreEl = document.getElementById('score');
         this.submitBtnEl = document.getElementById('submitBtn');
+        this.helpGuideEl = document.getElementById('helpGuide');
+        this.startGameBtnEl = document.getElementById('startGameBtn');
+        this.gameContentEl = document.querySelector('.game-content');
     }
     
     setupEventListeners() {
@@ -48,12 +51,32 @@ class WordScrambleGame {
                 this.checkAnswer();
             });
         }
+        if (this.startGameBtnEl) {
+            this.startGameBtnEl.addEventListener('click', () => {
+                this.startGame();
+            });
+        }
     }
     
-    startNewGame() {
+    startGame() {
+        if (this.helpGuideEl) {
+            this.helpGuideEl.style.display = 'none';
+        }
+        if (this.gameContentEl) {
+            this.gameContentEl.classList.remove('game-hidden');
+        }
         this.score = 0;
         this.updateScore();
         this.nextWord();
+    }
+    
+    startNewGame() {
+        if (this.gameContentEl) {
+            this.gameContentEl.classList.add('game-hidden');
+        }
+        if (this.helpGuideEl) {
+            this.helpGuideEl.style.display = 'block';
+        }
     }
     
     nextWord() {

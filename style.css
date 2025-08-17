@@ -266,6 +266,13 @@ body {
     animation: instructionsPulse 3s ease-in-out infinite;
 }
 
+.instructions h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 15px;
+}
+
 .instructions p {
     margin-bottom: 8px;
     font-weight: 600;
@@ -287,10 +294,29 @@ body {
     animation-delay: 1.5s;
 }
 
+.instructions p:nth-child(4) {
+    animation-delay: 2s;
+}
+
+.instructions p:nth-child(5) {
+    animation-delay: 2.5s;
+}
+
 .instructions p:last-child {
     margin-bottom: 0;
 }
 
+#startGameBtn {
+    margin-top: 15px;
+    animation: instructionSlide 2s ease-out;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-delay: 3s;
+}
+
+.game-hidden {
+    display: none;
+}
 @keyframes instructionsPulse {
     0%, 100% {
         transform: scale(1);
