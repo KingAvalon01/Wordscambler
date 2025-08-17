@@ -38,39 +38,33 @@ body {
 
 .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-bottom: 30px;
     gap: 20px;
 }
 
-.timer-container, .score-container {
-    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+.score-container {
+    background: linear-gradient(135deg, #4ecdc4, #44a08d);
     color: white;
     padding: 15px 20px;
     border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
-    flex: 1;
+    box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
     transform: translateY(0);
     transition: transform 0.3s ease;
 }
 
-.timer-container:hover, .score-container:hover {
+.score-container:hover {
     transform: translateY(-2px);
 }
 
-.score-container {
-    background: linear-gradient(135deg, #4ecdc4, #44a08d);
-    box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
-}
-
-.timer-label, .score-label {
+.score-label {
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 5px;
     opacity: 0.9;
 }
 
-.timer, .score {
+.score {
     font-size: 28px;
     font-weight: 700;
     font-family: 'Fredoka One', cursive;
@@ -189,45 +183,6 @@ body {
 
 .submit-btn:active {
     transform: translateY(0);
-}
-
-.start-container {
-    margin-bottom: 30px;
-}
-
-.start-btn {
-    padding: 20px 40px;
-    font-size: 1.3rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, #4ecdc4, #44a08d);
-    color: white;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: 'Nunito', sans-serif;
-    box-shadow: 0 8px 20px rgba(78, 205, 196, 0.4);
-    animation: pulse-start 2s ease-in-out infinite;
-}
-
-.start-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(78, 205, 196, 0.6);
-}
-
-.start-btn:active {
-    transform: translateY(0);
-}
-
-@keyframes pulse-start {
-    0%, 100% {
-        transform: scale(1);
-        box-shadow: 0 8px 20px rgba(78, 205, 196, 0.4);
-    }
-    50% {
-        transform: scale(1.05);
-        box-shadow: 0 12px 30px rgba(78, 205, 196, 0.6);
-    }
 }
 
 .message {
@@ -358,17 +313,6 @@ body {
     }
 }
 
-.timer.warning {
-    animation: pulse 1s infinite;
-    color: #ff6b6b !important;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .game-container {
@@ -388,6 +332,7 @@ body {
     .header {
         flex-direction: column;
         gap: 15px;
+        align-items: center;
     }
     
     .input-container {
