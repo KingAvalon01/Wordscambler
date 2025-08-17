@@ -61,6 +61,7 @@ class WordScrambleGame {
     startFirstGame() {
         this.gameStarted = true;
         document.getElementById('readyContainer').style.display = 'none';
+        this.nextWord();
         this.playerInputEl.focus();
         this.startTimer();
     }
@@ -72,7 +73,7 @@ class WordScrambleGame {
         this.gameOverEl.style.display = 'none';
         document.getElementById('readyContainer').style.display = 'block';
         this.updateScore();
-        this.nextWord();
+        this.resetForNewGame();
     }
     
     nextWord() {
@@ -185,6 +186,27 @@ class WordScrambleGame {
     timeUp() {
         this.showMessage(`⏰ Time's up! The word was: ${this.currentWord}`, 'incorrect');
         this.gameOver();
+    }
+    
+    resetForNewGame() {
+        // Clear previous messages and input
+        this.messageEl.textContent = '';
+        this.messageEl.className = 'message';
+        this.playerInputEl.value = '';
+        
+        // Show ready state
+        this.scrambledWordEl.textContent = "READY?";
+        
+        // Reset timer display but don't start it
+        this.timeLeft = 30;
+        this.updateTimer();
+        this.timerEl.classList.remove('warning');
+        
+        // Clear any existing timer
+        if (this.timer) {
+            clearInterval(this.timer);
+            this.timer = null;
+        }
     }
     
     gameOver() {
