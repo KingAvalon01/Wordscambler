@@ -34,7 +34,6 @@ class WordScrambleGame {
     initializeElements() {
         this.scrambledWordEl = document.getElementById('scrambledWord');
         this.playerInputEl = document.getElementById('playerInput');
-        this.submitBtnEl = document.getElementById('submitBtn');
         this.messageEl = document.getElementById('message');
         this.scoreEl = document.getElementById('score');
         this.timerEl = document.getElementById('timer');
@@ -44,7 +43,6 @@ class WordScrambleGame {
     }
     
     setupEventListeners() {
-        this.submitBtnEl.addEventListener('click', () => this.checkAnswer());
         this.playerInputEl.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 this.checkAnswer();
