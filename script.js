@@ -23,6 +23,7 @@ class WordScrambleGame {
         this.score = 0;
         this.timeLeft = 30;
         this.gameActive = false;
+        this.gameStarted = false;
         this.timer = null;
         
         this.initializeElements();
@@ -50,9 +51,10 @@ class WordScrambleGame {
             }
         });
         this.restartBtnEl.addEventListener('click', () => this.startNewGame());
+        this.readyBtnEl.addEventListener('click', () => this.startFirstGame());
         
         // Focus input when page loads
-        this.playerInputEl.focus();
+        // Don't focus input until game starts
     }
     
     startNewGame() {
@@ -86,7 +88,11 @@ class WordScrambleGame {
         // Reset and start timer
         this.timeLeft = 30;
         this.updateTimer();
-        this.startTimer();
+        
+        // Only start timer if game has actually started
+        if (this.gameStarted) {
+            this.startTimer();
+        }
     }
     
     scrambleWord(word) {
@@ -125,7 +131,7 @@ class WordScrambleGame {
     }
     
     checkAnswer() {
-        if (!this.gameActive) return;
+        if (!this.gameActive || !this.gameStarted) return;
         
         const playerAnswer = this.playerInputEl.value.trim().toUpperCase();
         
@@ -169,6 +175,7 @@ class WordScrambleGame {
     
     gameOver() {
         this.gameActive = false;
+        this.gameStarted = false;
         
         if (this.timer) {
             clearInterval(this.timer);
@@ -193,5 +200,7 @@ class WordScrambleGame {
 
 // Start the game when page loads
 document.addEventListener('DOMContentLoaded', () => {
-    new WordScrambleGame();
+    const game = new WordScrambleGame();
+    // Show initial scrambled word but don't start timer
+    game.scrambledWordEl.textContent = "READY?";
 });

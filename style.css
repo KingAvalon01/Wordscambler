@@ -262,16 +262,122 @@ body {
     background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
     border-radius: 15px;
     box-shadow: 0 5px 15px rgba(253, 203, 110, 0.3);
+    animation: instructionsPulse 3s ease-in-out infinite;
 }
 
 .instructions p {
     margin-bottom: 8px;
     font-weight: 600;
     color: #333;
+    animation: instructionSlide 2s ease-out;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+.instructions p:nth-child(1) {
+    animation-delay: 0.5s;
+}
+
+.instructions p:nth-child(2) {
+    animation-delay: 1s;
+}
+
+.instructions p:nth-child(3) {
+    animation-delay: 1.5s;
 }
 
 .instructions p:last-child {
     margin-bottom: 0;
+}
+
+@keyframes instructionsPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 5px 15px rgba(253, 203, 110, 0.3);
+    }
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 8px 25px rgba(253, 203, 110, 0.5);
+    }
+}
+
+@keyframes instructionSlide {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.ready-container {
+    margin: 30px 0;
+    padding: 25px;
+    background: linear-gradient(135deg, #a8e6cf, #88d8a3);
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(168, 230, 207, 0.4);
+    animation: readyPulse 2s ease-in-out infinite;
+}
+
+.ready-container h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.8rem;
+    color: #2d3436;
+    margin-bottom: 15px;
+    animation: readyBounce 1s ease-in-out infinite alternate;
+}
+
+.ready-btn {
+    padding: 18px 35px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #00b894, #00a085);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Nunito', sans-serif;
+    box-shadow: 0 6px 20px rgba(0, 184, 148, 0.4);
+    animation: readyButtonGlow 2s ease-in-out infinite;
+}
+
+.ready-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 184, 148, 0.6);
+}
+
+.ready-btn:active {
+    transform: translateY(-1px) scale(1.02);
+}
+
+@keyframes readyPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.03);
+    }
+}
+
+@keyframes readyBounce {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes readyButtonGlow {
+    0%, 100% {
+        box-shadow: 0 6px 20px rgba(0, 184, 148, 0.4);
+    }
+    50% {
+        box-shadow: 0 6px 20px rgba(0, 184, 148, 0.8);
+    }
 }
 
 .timer.warning {
