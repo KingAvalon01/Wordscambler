@@ -54,6 +54,9 @@ class WordScrambleGame {
         this.score = 0;
         this.updateScore();
         this.nextWord();
+    }
+    
+    nextWord() {
         if (this.playerInputEl) {
             this.playerInputEl.value = '';
             this.playerInputEl.focus();
@@ -61,14 +64,6 @@ class WordScrambleGame {
         if (this.messageEl) {
             this.messageEl.textContent = '';
             this.messageEl.className = 'message';
-        }
-        if (this.messageEl) {
-            this.messageEl.textContent = '';
-            this.messageEl.className = 'message';
-        }
-        if (this.playerInputEl) {
-            this.playerInputEl.value = '';
-            this.playerInputEl.focus();
         }
         
         this.currentWord = this.words[Math.floor(Math.random() * this.words.length)];
