@@ -62,9 +62,6 @@ class WordScrambleGame {
             this.messageEl.textContent = '';
             this.messageEl.className = 'message';
         }
-    }
-    
-    nextWord() {
         if (this.messageEl) {
             this.messageEl.textContent = '';
             this.messageEl.className = 'message';
