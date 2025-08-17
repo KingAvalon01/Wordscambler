@@ -72,12 +72,6 @@ class WordScrambleGame {
         this.gameOverEl.style.display = 'none';
         this.updateScore();
         this.resetForNewGame();
-        
-        // Make sure ready container is visible
-        const readyContainer = document.getElementById('readyContainer');
-        if (readyContainer) {
-            readyContainer.style.display = 'block';
-        }
     }
     
     nextWord() {
@@ -214,11 +208,8 @@ class WordScrambleGame {
             this.timer = null;
         }
         
-        // Ensure ready container is visible
-        const readyContainer = document.getElementById('readyContainer');
-        if (readyContainer) {
-            readyContainer.style.display = 'block';
-        }
+        // Show ready container
+        document.getElementById('readyContainer').style.display = 'block';
     }
     
     gameOver() {
