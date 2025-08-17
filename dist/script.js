@@ -33,7 +33,7 @@ class WordScrambleGame {
         this.messageEl = document.getElementById('message');
         this.scoreEl = document.getElementById('score');
         this.submitBtnEl = document.getElementById('submitBtn');
-        this.helpGuideEl = document.getElementById('helpGuide');
+        this.helpOverlayEl = document.getElementById('helpOverlay');
         this.helpBtnEl = document.getElementById('helpBtn');
         this.closeHelpBtnEl = document.getElementById('closeHelpBtn');
     }
@@ -64,14 +64,14 @@ class WordScrambleGame {
     }
     
     showHelp() {
-        if (this.helpGuideEl) {
-            this.helpGuideEl.classList.remove('help-hidden');
+        if (this.helpOverlayEl) {
+            this.helpOverlayEl.classList.remove('help-hidden');
         }
     }
     
     hideHelp() {
-        if (this.helpGuideEl) {
-            this.helpGuideEl.classList.add('help-hidden');
+        if (this.helpOverlayEl) {
+            this.helpOverlayEl.classList.add('help-hidden');
         }
     }
     
