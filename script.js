@@ -60,7 +60,7 @@ class WordScrambleGame {
     }
     
     startNewGame() {
-        if (this.gameOverEl) {
+        if (this.gameOverEl && this.gameOverEl.style) {
             this.gameOverEl.style.display = 'none';
         }
         this.score = 0;
