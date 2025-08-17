@@ -51,16 +51,9 @@ class WordScrambleGame {
     }
     
     startNewGame() {
-        try {
-            this.score = 0;
-            this.updateScore();
-            this.nextWord();
-        } catch (error) {
-            console.log('Error caught and handled:', error);
-            this.score = 0;
-            this.updateScore();
-            this.nextWord();
-        }
+        this.score = 0;
+        this.updateScore();
+        this.nextWord();
     }
     
     nextWord() {
