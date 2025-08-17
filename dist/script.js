@@ -1,33 +1,50 @@
 class WordScrambleGame {
     constructor() {
-        this.words = [
-            'APPLE', 'BANANA', 'ORANGE', 'GRAPE', 'LEMON',
-            'HOUSE', 'CHAIR', 'TABLE', 'WINDOW', 'DOOR',
-            'HAPPY', 'SMILE', 'LAUGH', 'DANCE', 'SING',
-            'OCEAN', 'BEACH', 'WAVES', 'SHELL', 'SAND',
-            'FLOWER', 'GARDEN', 'PLANT', 'GRASS', 'TREE',
-            'RAINBOW', 'CLOUD', 'SUNNY', 'STORM', 'WIND',
-            'BUTTERFLY', 'BIRD', 'FISH', 'CAT', 'DOG',
-            'BOOK', 'PENCIL', 'PAPER', 'SCHOOL', 'LEARN',
-            'FRIEND', 'FAMILY', 'LOVE', 'KIND', 'HELP',
-            'PIZZA', 'CAKE', 'COOKIE', 'BREAD', 'MILK',
-            'STAR', 'MOON', 'PLANET', 'SPACE', 'ROCKET',
-            'MAGIC', 'DREAM', 'WISH', 'HOPE', 'JOY',
-            'MUSIC', 'PIANO', 'GUITAR', 'DRUM', 'SONG',
-            'CASTLE', 'PRINCE', 'QUEEN', 'CROWN', 'GOLD',
-            'ADVENTURE', 'EXPLORE', 'DISCOVER', 'JOURNEY', 'PATH'
-        ];
+        this.wordsByDifficulty = {
+            easy: [
+                'CAT', 'DOG', 'SUN', 'FUN', 'RUN', 'HAT', 'BAT', 'RAT',
+                'FISH', 'BIRD', 'TREE', 'BOOK', 'CAKE', 'GAME', 'LOVE', 'HELP',
+                'STAR', 'MOON', 'PLAY', 'SING', 'JUMP', 'SWIM', 'WALK', 'TALK'
+            ],
+            medium: [
+                'APPLE', 'HOUSE', 'HAPPY', 'OCEAN', 'MUSIC', 'MAGIC', 'SMILE',
+                'DANCE', 'LAUGH', 'BEACH', 'PLANT', 'CHAIR', 'TABLE', 'WINDOW',
+                'FLOWER', 'GARDEN', 'FRIEND', 'FAMILY', 'SCHOOL', 'PENCIL',
+                'COOKIE', 'PLANET', 'CASTLE', 'PRINCE', 'GUITAR', 'DRAGON'
+            ],
+            hard: [
+                'RAINBOW', 'BUTTERFLY', 'ADVENTURE', 'DISCOVER', 'JOURNEY',
+                'ELEPHANT', 'MOUNTAIN', 'TREASURE', 'PRINCESS', 'DINOSAUR',
+                'COMPUTER', 'SANDWICH', 'BIRTHDAY', 'VACATION', 'HOMEWORK',
+                'FOOTBALL', 'SWIMMING', 'PAINTING', 'BUILDING', 'SHOPPING'
+            ]
+        };
         
         this.currentWord = '';
         this.scrambledWord = '';
         this.score = 0;
+        this.difficulty = 'medium';
+        this.timerMode = 'none';
+        this.timeLeft = 0;
+        this.timerInterval = null;
+        this.gameActive = false;
         
         this.initializeElements();
         this.setupEventListeners();
-        this.startNewGame();
+        this.showSettings();
     }
     
     initializeElements() {
+        this.gameSettingsEl = document.getElementById('gameSettings');
+        this.gameContentEl = document.getElementById('gameContent');
+        this.difficultySelectEl = document.getElementById('difficultySelect');
+        this.startGameBtnEl = document.getElementById('startGameBtn');
+        this.newGameBtnEl = document.getElementById('newGameBtn');
+        this.timerContainerEl = document.getElementById('timerContainer');
+        this.timerEl = document.getElementById('timer');
+        this.gameOverModalEl = document.getElementById('gameOverModal');
+        this.finalScoreEl = document.getElementById('finalScore');
+        this.playAgainBtnEl = document.getElementById('playAgainBtn');
         this.scrambledWordEl = document.getElementById('scrambledWord');
         this.playerInputEl = document.getElementById('playerInput');
         this.messageEl = document.getElementById('message');
@@ -39,6 +56,21 @@ class WordScrambleGame {
     }
     
     setupEventListeners() {
+        if (this.startGameBtnEl) {
+            this.startGameBtnEl.addEventListener('click', () => {
+                this.startGame();
+            });
+        }
+        if (this.newGameBtnEl) {
+            this.newGameBtnEl.addEventListener('click', () => {
+                this.showSettings();
+            });
+        }
+        if (this.playAgainBtnEl) {
+            this.playAgainBtnEl.addEventListener('click', () => {
+                this.showSettings();
+            });
+        }
         if (this.playerInputEl) {
             this.playerInputEl.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
@@ -63,6 +95,81 @@ class WordScrambleGame {
         }
     }
     
+    showSettings() {
+        this.gameActive = false;
+        this.clearTimer();
+        if (this.gameSettingsEl) this.gameSettingsEl.style.display = 'block';
+        if (this.gameContentEl) this.gameContentEl.style.display = 'none';
+        if (this.gameOverModalEl) this.gameOverModalEl.style.display = 'none';
+        if (this.timerContainerEl) this.timerContainerEl.style.display = 'none';
+    }
+    
+    startGame() {
+        // Get selected difficulty
+        if (this.difficultySelectEl) {
+            this.difficulty = this.difficultySelectEl.value;
+        }
+        
+        // Get selected timer mode
+        const timerRadios = document.querySelectorAll('input[name="timerMode"]');
+        timerRadios.forEach(radio => {
+            if (radio.checked) {
+                this.timerMode = radio.value;
+            }
+        });
+        
+        // Setup timer if needed
+        if (this.timerMode !== 'none') {
+            this.timeLeft = parseInt(this.timerMode);
+            if (this.timerContainerEl) this.timerContainerEl.style.display = 'block';
+            this.updateTimer();
+            this.startTimer();
+        } else {
+            if (this.timerContainerEl) this.timerContainerEl.style.display = 'none';
+        }
+        
+        // Show game content and hide settings
+        if (this.gameSettingsEl) this.gameSettingsEl.style.display = 'none';
+        if (this.gameContentEl) this.gameContentEl.style.display = 'block';
+        
+        // Start the game
+        this.gameActive = true;
+        this.score = 0;
+        this.updateScore();
+        this.nextWord();
+    }
+    
+    startTimer() {
+        this.timerInterval = setInterval(() => {
+            this.timeLeft--;
+            this.updateTimer();
+            
+            if (this.timeLeft <= 0) {
+                this.gameOver();
+            }
+        }, 1000);
+    }
+    
+    clearTimer() {
+        if (this.timerInterval) {
+            clearInterval(this.timerInterval);
+            this.timerInterval = null;
+        }
+    }
+    
+    updateTimer() {
+        if (this.timerEl) {
+            this.timerEl.textContent = this.timeLeft;
+        }
+    }
+    
+    gameOver() {
+        this.gameActive = false;
+        this.clearTimer();
+        if (this.finalScoreEl) this.finalScoreEl.textContent = this.score;
+        if (this.gameOverModalEl) this.gameOverModalEl.style.display = 'flex';
+    }
+    
     showHelp() {
         if (this.helpOverlayEl) {
             this.helpOverlayEl.classList.remove('help-hidden');
@@ -75,13 +182,9 @@ class WordScrambleGame {
         }
     }
     
-    startNewGame() {
-        this.score = 0;
-        this.updateScore();
-        this.nextWord();
-    }
-    
     nextWord() {
+        if (!this.gameActive) return;
+        
         if (this.playerInputEl) {
             this.playerInputEl.value = '';
             this.playerInputEl.focus();
@@ -91,7 +194,8 @@ class WordScrambleGame {
             this.messageEl.className = 'message';
         }
         
-        this.currentWord = this.words[Math.floor(Math.random() * this.words.length)];
+        const wordsForDifficulty = this.wordsByDifficulty[this.difficulty];
+        this.currentWord = wordsForDifficulty[Math.floor(Math.random() * wordsForDifficulty.length)];
         this.scrambledWord = this.scrambleWord(this.currentWord);
         
         while (this.scrambledWord === this.currentWord) {
@@ -113,7 +217,7 @@ class WordScrambleGame {
     }
     
     checkAnswer() {
-        if (!this.playerInputEl) return;
+        if (!this.playerInputEl || !this.gameActive) return;
         
         const playerAnswer = this.playerInputEl.value.trim().toUpperCase();
         

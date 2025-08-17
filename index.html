@@ -14,9 +14,46 @@
                 <div class="score-label">Score</div>
                 <div class="score" id="score">0</div>
             </div>
+            <div class="timer-container" id="timerContainer" style="display: none;">
+                <div class="timer-label">Time</div>
+                <div class="timer" id="timer">30</div>
+            </div>
         </div>
 
-        <div class="game-content">
+        <div class="game-settings" id="gameSettings">
+            <h2 class="settings-title">🎮 Game Settings</h2>
+            
+            <div class="setting-group">
+                <label class="setting-label">Difficulty Level:</label>
+                <select id="difficultySelect" class="setting-select">
+                    <option value="easy">Easy (3-4 letters)</option>
+                    <option value="medium" selected>Medium (4-6 letters)</option>
+                    <option value="hard">Hard (6-8 letters)</option>
+                </select>
+            </div>
+
+            <div class="setting-group">
+                <label class="setting-label">Timer Mode:</label>
+                <div class="timer-options">
+                    <label class="radio-option">
+                        <input type="radio" name="timerMode" value="none" checked>
+                        <span>No Timer</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="timerMode" value="30">
+                        <span>30 seconds</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="timerMode" value="60">
+                        <span>60 seconds</span>
+                    </label>
+                </div>
+            </div>
+
+            <button id="startGameBtn" class="start-game-btn">🚀 Start Game</button>
+        </div>
+
+        <div class="game-content" id="gameContent" style="display: none;">
             <h1 class="game-title">🎯 Word Scramble 🎯</h1>
             
             <div class="scrambled-word-container">
@@ -31,6 +68,15 @@
 
             <div class="message" id="message"></div>
 
+            <button id="newGameBtn" class="new-game-btn">🔄 New Game</button>
+        </div>
+
+        <div id="gameOverModal" class="game-over-modal" style="display: none;">
+            <div class="game-over-content">
+                <h2>⏰ Time's Up!</h2>
+                <p>Your final score: <span id="finalScore">0</span></p>
+                <button id="playAgainBtn" class="submit-btn">Play Again</button>
+            </div>
         </div>
 
         <button id="helpBtn" class="help-btn">❓ Help</button>
