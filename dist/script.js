@@ -22,7 +22,6 @@ class WordScrambleGame {
         
         this.currentWord = '';
         this.scrambledWord = '';
-        this.score = 0;
         this.difficulty = 'medium';
         this.timerMode = 'none';
         this.timeLeft = 0;
@@ -43,12 +42,10 @@ class WordScrambleGame {
         this.timerContainerEl = document.getElementById('timerContainer');
         this.timerEl = document.getElementById('timer');
         this.gameOverModalEl = document.getElementById('gameOverModal');
-        this.finalScoreEl = document.getElementById('finalScore');
         this.playAgainBtnEl = document.getElementById('playAgainBtn');
         this.scrambledWordEl = document.getElementById('scrambledWord');
         this.playerInputEl = document.getElementById('playerInput');
         this.messageEl = document.getElementById('message');
-        this.scoreEl = document.getElementById('score');
         this.submitBtnEl = document.getElementById('submitBtn');
         this.helpOverlayEl = document.getElementById('helpOverlay');
         this.helpBtnEl = document.getElementById('helpBtn');
@@ -134,8 +131,6 @@ class WordScrambleGame {
         
         // Start the game
         this.gameActive = true;
-        this.score = 0;
-        this.updateScore();
         this.nextWord();
     }
     
@@ -166,7 +161,6 @@ class WordScrambleGame {
     gameOver() {
         this.gameActive = false;
         this.clearTimer();
-        if (this.finalScoreEl) this.finalScoreEl.textContent = this.score;
         if (this.gameOverModalEl) this.gameOverModalEl.style.display = 'flex';
     }
     
@@ -236,8 +230,6 @@ class WordScrambleGame {
     }
     
     correctAnswer() {
-        this.score += 1;
-        this.updateScore();
         this.showMessage('🎉 Correct! Well done! 🎉', 'correct');
         
         setTimeout(() => {
@@ -249,12 +241,6 @@ class WordScrambleGame {
         if (this.messageEl) {
             this.messageEl.textContent = text;
             this.messageEl.className = `message ${type}`;
-        }
-    }
-    
-    updateScore() {
-        if (this.scoreEl) {
-            this.scoreEl.textContent = this.score;
         }
     }
 }
