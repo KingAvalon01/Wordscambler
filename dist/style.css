@@ -310,6 +310,10 @@ body {
     margin-top: 15px;
 }
 
+.help-hidden {
+    display: none !important;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .game-container {
