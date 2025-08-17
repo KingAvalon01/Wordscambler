@@ -43,12 +43,16 @@ class WordScrambleGame {
     }
     
     setupEventListeners() {
-        this.playerInputEl.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                this.checkAnswer();
-            }
-        });
-        this.restartBtnEl.addEventListener('click', () => this.startNewGame());
+        if (this.playerInputEl) {
+            this.playerInputEl.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    this.checkAnswer();
+                }
+            });
+        }
+        if (this.restartBtnEl) {
+            this.restartBtnEl.addEventListener('click', () => this.startNewGame());
+        }
     }
     
     startNewGame() {
