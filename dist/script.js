@@ -63,7 +63,6 @@ class WordScrambleGame {
     
     startNewGame() {
         this.gameOverEl.style.display = 'none';
-        this.startNewGame();
         this.score = 0;
         this.gameActive = true;
         this.updateScore();
