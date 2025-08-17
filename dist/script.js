@@ -79,6 +79,12 @@ class WordScrambleGame {
         this.playerInputEl.value = '';
         this.playerInputEl.focus();
         
+        // Reset timer state for new word
+        this.timerStarted = false;
+        if (this.timer) {
+            clearInterval(this.timer);
+        }
+        
         // Select random word
         this.currentWord = this.words[Math.floor(Math.random() * this.words.length)];
         this.scrambledWord = this.scrambleWord(this.currentWord);
@@ -93,7 +99,6 @@ class WordScrambleGame {
         // Reset and start timer
         this.timeLeft = 30;
         this.updateTimer();
-        this.startTimer();
         this.startTimer();
     }
     
@@ -145,9 +150,7 @@ class WordScrambleGame {
         if (playerAnswer === this.currentWord) {
             this.correctAnswer();
         } else {
-            this.showMessage('❌ Try again!', 'incorrect');
-            this.playerInputEl.value = '';
-            this.playerInputEl.focus();
+            this.incorrectAnswer();
         }
     }
     
