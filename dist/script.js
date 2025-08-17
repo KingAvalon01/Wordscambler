@@ -33,7 +33,7 @@ class WordScrambleGame {
         this.playerInputEl = document.getElementById('playerInput');
         this.messageEl = document.getElementById('message');
         this.scoreEl = document.getElementById('score');
-        this.gameOverEl = document.getElementById('gameOver');
+        this.gameOverEl = document.getElementById('gameOver') || null;
         this.finalScoreEl = document.getElementById('finalScore');
         this.restartBtnEl = document.getElementById('restartBtn');
         this.submitBtnEl = document.getElementById('submitBtn');
