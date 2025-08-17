@@ -58,6 +58,36 @@ class WordScrambleGame {
         // Don't focus input until game starts
     }
     
+    initializeGame() {
+        this.score = 0;
+        this.gameActive = true;
+        this.gameStarted = false;
+        this.updateScore();
+        
+        // Show ready state without starting timer
+        this.scrambledWordEl.textContent = "READY?";
+        this.timeLeft = 30;
+        this.updateTimer();
+        this.timerEl.classList.remove('warning');
+        
+        // Clear any existing timer
+        if (this.timer) {
+            clearInterval(this.timer);
+            this.timer = null;
+        }
+        
+        // Show ready container
+        const readyContainer = document.getElementById('readyContainer');
+        if (readyContainer) {
+            readyContainer.style.display = 'block';
+        }
+        
+        // Clear messages
+        this.messageEl.textContent = '';
+        this.messageEl.className = 'message';
+        this.playerInputEl.value = '';
+    }
+    
     startFirstGame() {
         this.gameStarted = true;
         document.getElementById('readyContainer').style.display = 'none';
@@ -66,12 +96,8 @@ class WordScrambleGame {
     }
     
     startNewGame() {
-        this.score = 0;
-        this.gameActive = true;
-        this.gameStarted = false;
         this.gameOverEl.style.display = 'none';
-        this.updateScore();
-        this.resetForNewGame();
+        this.initializeGame();
     }
     
     nextWord() {
