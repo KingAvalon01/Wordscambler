@@ -49,6 +49,12 @@ class WordScrambleGame {
                     this.checkAnswer();
                 }
             });
+            this.playerInputEl.addEventListener('input', (e) => {
+                if (!this.timerStarted && e.target.value.length === 1 && this.gameActive) {
+                    this.startTimer();
+                    this.timerStarted = true;
+                }
+            });
         }
         if (this.restartBtnEl) {
             this.restartBtnEl.addEventListener('click', () => this.startNewGame());
@@ -139,7 +145,9 @@ class WordScrambleGame {
         if (playerAnswer === this.currentWord) {
             this.correctAnswer();
         } else {
-            this.incorrectAnswer();
+            this.showMessage('❌ Try again!', 'incorrect');
+            this.playerInputEl.value = '';
+            this.playerInputEl.focus();
         }
     }
     
@@ -157,11 +165,6 @@ class WordScrambleGame {
         setTimeout(() => {
             this.nextWord();
         }, 1500);
-    }
-    
-    incorrectAnswer() {
-        this.showMessage(`❌ Try again! The word was: ${this.currentWord}`, 'incorrect');
-        this.gameOver();
     }
     
     timeUp() {
