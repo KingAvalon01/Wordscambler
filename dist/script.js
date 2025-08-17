@@ -63,7 +63,6 @@ class WordScrambleGame {
         document.getElementById('readyContainer').style.display = 'none';
         this.nextWord();
         this.playerInputEl.focus();
-        this.startTimer();
     }
     
     startNewGame() {
