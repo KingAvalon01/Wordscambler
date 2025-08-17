@@ -50,10 +50,16 @@ class WordScrambleGame {
         }
     }
     
-    startNewGame() {
-        this.score = 0;
-        this.updateScore();
-        this.nextWord();
+        try {
+            this.score = 0;
+            this.updateScore();
+            this.nextWord();
+        } catch (error) {
+            console.log('Error caught and handled:', error);
+            this.score = 0;
+            this.updateScore();
+            this.nextWord();
+        }
     }
     
     nextWord() {
